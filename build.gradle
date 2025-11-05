@@ -52,4 +52,5 @@ task practicFormTests(type: Test) {
     useJUnitPlatform {
         includeTags("practicFormTests")
     }
+    systemProperty 'remoteUrl', System.getProperty('remoteUrl')
 }
