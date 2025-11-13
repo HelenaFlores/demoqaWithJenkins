@@ -5,19 +5,19 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import properties.test.SystemPropertiesTests;
 
 import java.util.Map;
 
-public class TestBase extends SystemPropertiesTests {
+public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = SystemPropertiesTests.getRemoteUrl(); //"https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = System.getProperty("remote"); //"https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
