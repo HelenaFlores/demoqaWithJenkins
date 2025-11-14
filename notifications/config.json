@@ -1,0 +1,17 @@
+{
+  "base": {
+    "project": "Demoqa with Telegram Notifications",
+    "environment": "some env",
+    "comment": "some comment @svitikf",
+    "reportLink": "https://jenkins.autotests.cloud/job/demoqaWithJenkinsWithTelegramBotNotifications/1/",
+    "language": "ru",
+    "messenger": "telegram",
+    "allureFolder": "C:\\Users\\S4A99~1.KUP\\AppData\\Local\\Temp\\6945812348428263962\\allure-report",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "8337863456:AAE6cbk5Ujex5imBPzK6ScpP2mdNzPP-GBo",
+    "chat": "-1003382920875",
+    "replyTo": ""
+  }
+}
