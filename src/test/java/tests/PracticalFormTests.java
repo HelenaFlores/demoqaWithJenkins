@@ -1,6 +1,8 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -16,6 +18,7 @@ public class PracticalFormTests extends TestBase {
 
     @BeforeEach
     void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         practicalFormPage = new PracticalFormPage();
         randomUtils = new RandomUtils();
         practicalFormPage.openPage();
@@ -66,7 +69,7 @@ public class PracticalFormTests extends TestBase {
                 .checkResultForm("Gender", gender)
                 .checkResultForm("Mobile", phoneUser)
                 .checkResultForm("Student Email", userEmail)
-                .checkResultForm("Date of Birth", day + " " + month + "," + year) //03 March,2013"
+                .checkResultForm("Date of Birth", day + " " + month + "," + year)
                 .checkResultForm("Subjects", subject)
                 .checkResultForm("Hobbies", hobby)
                 .checkResultForm("Picture", "pes2.jpg")
