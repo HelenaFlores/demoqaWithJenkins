@@ -12,15 +12,12 @@ import utils.RandomUtils;
 
 
 public class PracticalFormTests extends TestBase {
-    private PracticalFormPage practicalFormPage;
-    private RandomUtils randomUtils;
-
+    private PracticalFormPage practicalFormPage = new PracticalFormPage();
+    private RandomUtils randomUtils = new RandomUtils();
 
     @BeforeEach
     void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        practicalFormPage = new PracticalFormPage();
-        randomUtils = new RandomUtils();
         practicalFormPage.openPage();
     }
 
