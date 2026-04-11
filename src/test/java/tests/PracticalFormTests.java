@@ -16,17 +16,8 @@ public class PracticalFormTests extends TestBase {
     private RandomUtils randomUtils = new RandomUtils();
 
     @BeforeEach
-    void setUp() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    void beforeTests() {
         practicalFormPage.openPage();
-    }
-
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
     }
 
     @Tag("practicFormTests")
