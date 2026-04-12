@@ -26,6 +26,53 @@ public class PracticalFormTests extends TestBase {
 
     @Tag("practicFormTests")
     @Test
+    void practicFormWithAllFieldsTest() {
+
+        String firstName = randomUtils.getRandomFirstName();
+        String lastName = randomUtils.getRandomLastname();
+        String userEmail = randomUtils.getRandomEmail();
+        String streetAddress = randomUtils.getRandomAddress();
+        String phoneUser = randomUtils.getRandomPhone();
+        String gender = randomUtils.getRandomGender();
+        String hobby = randomUtils.getRandomHobby();
+        String subject = randomUtils.getRandomSubject();
+        String state = randomUtils.getRandomState();
+        String city = randomUtils.getRandomCity(state);
+        String month = randomUtils.getRandomMonth();
+        String year = randomUtils.getRandomYear();
+        String day = randomUtils.getRandomDay();
+
+        step("Fill form", () -> {
+        practicalFormPage.setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(userEmail)
+                .setGender(gender)
+                .setUserNumber(phoneUser)
+                .setBirthDate(day, month, year)
+                .setSubject(subject)
+                .setHobbies(hobby)
+                .uploadPicture("pes2.jpg")
+                .setCurrentAddress(streetAddress)
+                .setState(state)
+                .setCity(city)
+                .submitClick();
+        });
+        step("Verify results", () -> {
+        practicalFormPage.checkResultForm("Student Name", firstName + " " + lastName)
+                .checkResultForm("Gender", gender)
+                .checkResultForm("Mobile", phoneUser)
+                .checkResultForm("Student Email", userEmail)
+                .checkResultForm("Date of Birth", day + " " + month + "," + year) //03 March,2013"
+                .checkResultForm("Subjects", subject)
+                .checkResultForm("Hobbies", hobby)
+                .checkResultForm("Picture", "pes2.jpg")
+                .checkResultForm("Address", streetAddress)
+                .checkResultForm("State and City", state + " " + city);
+        });
+    }
+
+    @Tag("practicFormTests")
+    @Test
     void successfulRegistrationTest() {
             String firstName = randomUtils.getRandomFirstName();
             String lastName = randomUtils.getRandomLastname();
