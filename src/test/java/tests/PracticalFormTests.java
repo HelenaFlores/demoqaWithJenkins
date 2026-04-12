@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import pages.PracticalFormPage;
 import utils.RandomUtils;
 
+import static io.qameta.allure.Allure.step;
+
 
 public class PracticalFormTests extends TestBase {
     private PracticalFormPage practicalFormPage = new PracticalFormPage();
@@ -17,29 +19,30 @@ public class PracticalFormTests extends TestBase {
 
     @BeforeEach
     void beforeTests() {
+        step("Open form", () -> {
         practicalFormPage.openPage();
+        });
     }
 
     @Tag("practicFormTests")
     @Test
-    void practicFormWithAllFieldsTest() throws InterruptedException {
+    void successfulRegistrationTest() {
+            String firstName = randomUtils.getRandomFirstName();
+            String lastName = randomUtils.getRandomLastname();
+            String userEmail = randomUtils.getRandomEmail();
+            String streetAddress = randomUtils.getRandomAddress();
+            String phoneUser = randomUtils.getRandomPhone();
+            String gender = randomUtils.getRandomGender();
+            String hobby = randomUtils.getRandomHobby();
+            String subject = randomUtils.getRandomSubject();
+            String state = randomUtils.getRandomState();
+            String city = randomUtils.getRandomCity(state);
+            String month = randomUtils.getRandomMonth();
+            String year = randomUtils.getRandomYear();
+            String day = randomUtils.getRandomDay();
 
-        String firstName = randomUtils.getRandomFirstName();
-        String lastName = randomUtils.getRandomLastname();
-        String userEmail = randomUtils.getRandomEmail();
-        String streetAddress = randomUtils.getRandomAddress();
-        String phoneUser = randomUtils.getRandomPhone();
-        String gender = randomUtils.getRandomGender();
-        String hobby = randomUtils.getRandomHobby();
-        String subject = randomUtils.getRandomSubject();
-        String state = randomUtils.getRandomState();
-        String city = randomUtils.getRandomCity(state);
-        String month = randomUtils.getRandomMonth();
-        String year = randomUtils.getRandomYear();
-        String day = randomUtils.getRandomDay();
-
-
-        practicalFormPage.setFirstName(firstName)
+        step("Fill form", () -> {
+            practicalFormPage.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
                 .setGender(gender)
@@ -52,8 +55,10 @@ public class PracticalFormTests extends TestBase {
                 .setState(state)
                 .setCity(city)
                 .submitClick();
+        });
 
-        practicalFormPage.checkResultForm("Student Name", firstName + " " + lastName)
+        step("Verify results", () -> {
+            practicalFormPage.checkResultForm("Student Name", firstName + " " + lastName)
                 .checkResultForm("Gender", gender)
                 .checkResultForm("Mobile", phoneUser)
                 .checkResultForm("Student Email", userEmail)
@@ -63,6 +68,7 @@ public class PracticalFormTests extends TestBase {
                 .checkResultForm("Picture", "pes2.jpg")
                 .checkResultForm("Address", streetAddress)
                 .checkResultForm("State and City", state + " " + city);
+        });
     }
 
     @Tag("practicFormTests")
@@ -74,22 +80,28 @@ public class PracticalFormTests extends TestBase {
         String phoneUser = randomUtils.getRandomPhone();
         String gender = randomUtils.getRandomGender();
 
+        step("Fill form", () -> {
         practicalFormPage.setFirstName(firstName)
                 .setLastName(lastName)
                 .setGender(gender)
                 .setUserNumber(phoneUser)
                 .submitClick();
-
+        });
+        step("Verify results", () -> {
         practicalFormPage.checkResultForm("Student Name", firstName + " " + lastName)
                 .checkResultForm("Gender", gender)
                 .checkResultForm("Mobile", phoneUser);
+        });
     }
 
     @Tag("negative")
     @Test
     void practicFormWithoutFieldsTest() {
+        step("Confirm the form without filling it out", () -> {
         practicalFormPage.submitClick();
-
+        });
+        step("Verify results", () -> {
         practicalFormPage.presenceOfModalWindow();
+            });
     }
 }
