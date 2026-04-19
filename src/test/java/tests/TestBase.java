@@ -21,7 +21,7 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-
+        Configuration.remote = System.getProperty("remoteUrl");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -34,7 +34,7 @@ public class TestBase {
     @BeforeEach
     void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        Configuration.remote = System.getProperty("remoteUrl");
+
     }
 
     @AfterEach
